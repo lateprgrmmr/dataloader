@@ -7,7 +7,7 @@ from selenium.webdriver.common.keys import Keys
 browser = webdriver.Chrome()
 browser.get('http://www.google.com/maps')
 
-search_term = 'Billings Funeral Home'
+search_term = 'Robert E. Decker Funeral Home'
 
 search = browser.find_element_by_name('q')
 search.send_keys(search_term)
