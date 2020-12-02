@@ -1,16 +1,17 @@
 import sys
 import os
-# import csv
-# import re
-# from removals import remove
-# import petl as etl
+import csv
+import re
+#from removals import remove
+#import petl as etl
 from nameparser import HumanName as hn
+#import openpyxl as op
 import pandas as pd
 
 
-# -- print("dumb fuck")
-# -- etl.transform.regex.capture() <-- WILL be useful, learn REGEX!!!
-# -- https://petl.readthedocs.io/en/stable/transform.html
+#print("dumb fuck")
+# etl.transform.regex.capture() <-- WILL be useful, learn REGEX!!!
+# https://petl.readthedocs.io/en/stable/transform.html
 
 # -- Prints a note about acceptable file types/format and prompts user for input file
 # -- print('NOTE: Accepts .xlsx files with a single column (Name) of names to be fixed
@@ -42,11 +43,9 @@ def SplitNames(file, cols):
             # -- Removes current known portions of unformatted names -- Need to
             # -- figure out how to pass this as a list
             # -- ['Rev.','Sr.','Sr',' sr','Jr.','Jr','jr','III','II','-DEL']
-            a = row.replace('Rev.', '').replace(
-                'Sr.,', '').replace('Sr.', '').replace('Sr', '').replace(' sr', '') \
-                    .replace('Jr.', '').replace('Jr', '').replace('jr', '') \
-                        .replace('III', '').replace('II', '').replace('-DEL', '')
-        # .replace(' , ','')
+            a = row.replace('Rev.', '').replace('Sr.,', '').replace('Sr.', '').replace('Sr', '').replace(' sr', '').replace(
+                'Jr.', '').replace('Jr', '').replace('jr', '').replace('III', '').replace('II', '').replace('-DEL', '')
+            # .replace(' , ','')
             a2 = a.replace('(', '').replace(')', '')
         # -- Apply the HumanName parser
             b = hn(a2)
