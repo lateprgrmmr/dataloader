@@ -14,5 +14,7 @@ def get_urls(tag, n, language):
     print(urls)
     return urls
 
+mail_list = re.findall('\w+@\w+\.{1}\w+', html_text)
+
 if __name__ == "__main__":
     get_urls('Funeral Home in Boise, ID', 50, 'en')
