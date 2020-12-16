@@ -1,7 +1,7 @@
 import pdfreader
 from pdfreader import PDFDocument, SimplePDFViewer
 
-fd = open('nomis_sample.pdf', 'rb')
+fd = open('pdf_test.pdf', 'rb')
 doc = PDFDocument(fd)
 #viewer = SimplePDFViewer(fd)
 # viewer.navigate()
