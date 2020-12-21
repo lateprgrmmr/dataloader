@@ -12,8 +12,8 @@ from bs4 import BeautifulSoup
 SEARCH = [
     'https://jwfuneraldirectors.net/',
     'https://www.nswcares.com/',
-    'https://bellbrothersfuneral.com/'
-    # 'https://www.bondfuneraldirectors.com/'
+    'https://bellbrothersfuneral.com/',
+    'https://www.bondfuneraldirectors.com/'
 ]
 
 RES = []
