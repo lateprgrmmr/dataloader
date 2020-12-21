@@ -1,5 +1,6 @@
 # import selenium
 import re
+import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 # import requests
@@ -11,13 +12,14 @@ from bs4 import BeautifulSoup
 SEARCH = [
     'https://jwfuneraldirectors.net/',
     'https://www.nswcares.com/',
-    'https://bellbrothersfuneral.com/',
-    'https://www.bondfuneraldirectors.com/'
+    'https://bellbrothersfuneral.com/'
+    # 'https://www.bondfuneraldirectors.com/'
 ]
 
 RES = []
 
 for s in SEARCH:
+    tic = time.perf_counter()
     option = Options()
     option.add_argument('headless')
     driver = webdriver.Chrome(options=option)
@@ -47,4 +49,7 @@ for s in SEARCH:
     else:
         RES.append([s, 'Could not determine provider'])
     driver.close()
+    toc = time.perf_counter()
+    tt = toc - tic
+    RES.append(tt)
 print(RES)

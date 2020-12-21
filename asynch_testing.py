@@ -1,7 +1,9 @@
-from csv import DictWriter
-from concurrent.futures import ProcessPoolExecutor
-import concurrent.futures
+from bs4 import BeautifulSoup
+import grequests
+import requests
+import time
 
+start_time = time.time()
 
 URLS = [
     'https://jwfuneraldirectors.net/',
@@ -10,15 +12,35 @@ URLS = [
     'https://www.bondfuneraldirectors.com/'
 ]
 
-def parse(url):
-    return data
+RES = []
 
-results = []
-for url in URLS:
-    results.append(parse(url))
+reqs = (grequests.get(link) for link in URLS)
+resp = grequests.imap(reqs, grequests.Pool(10))
 
-with open('results.csv', 'w') as f:
-    writer = DictWriter(f, fieldnames=results[0].keys())
-    writer.writeheader()
-    writer.writerows(results)
-
+for r in resp:
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    if soup.find_all(href=re.compile('funeralone')) != []:
+        RES.append([s, 'FuneralOne']) #,soup.find_all(href=re.compile('funeralone'))])
+    elif soup.find_all(href=re.compile('funeraltech')) != []:
+        RES.append([s, 'FuneralTech']) #,soup.find_all(href=re.compile('funeraltech'))])
+    elif soup.find_all(href=re.compile('srscomputing')) != []:
+        RES.append([s, 'SRS']) #,soup.find_all(href=re.compile('srscomputing'))])
+    elif soup.find_all(href=re.compile('frazerconsultants')) != []:
+        RES.append([s, 'Frazer Consultants'])
+        #,soup.find_all(href=re.compile('frazerconsultants'))])
+    elif soup.find_all(href=re.compile('consolidatedfuneralservices')) != []:
+        RES.append([s, 'CFS']) #,soup.find_all(href=re.compile('consolidatedfuneralservices'))])
+    elif soup.find_all(href=re.compile('funeralinnovations')) != []:
+        RES.append([s, 'Funeral Innovations'])
+        #,soup.find_all(href=re.compile('funeralinnovations'))])
+    elif soup.find_all(href=re.compile('frontrunner360')) != []:
+        RES.append([s, 'FrontRunner']) #,soup.find_all(href=re.compile('frontrunner360'))])
+    elif soup.find_all(href=re.compile('batesvilletechnology')) != []:
+        RES.append([s, 'Batesville']) #,soup.find_all(href=re.compile('batesvilletechnology'))])
+    elif soup.find_all(href=re.compile('funeralresults')) != []:
+        RES.append([s, 'FRM']) #,soup.find_all(href=re.compile('funeralresults'))])
+    else:
+        RES.append([s, 'Could not determine provider'])
+    tt = time.time() - start_time
+    RES.append(tt)
+print(RES)
