@@ -1,8 +1,11 @@
 # import selenium
 import re
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 # import requests
 from bs4 import BeautifulSoup
+
+
 
 
 SEARCH = [
@@ -15,7 +18,9 @@ SEARCH = [
 RES = []
 
 for s in SEARCH:
-    driver = webdriver.Chrome()
+    option = Options()
+    option.add_argument('headless')
+    driver = webdriver.Chrome(options=option)
     driver.get(s)
 
     soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -26,12 +31,13 @@ for s in SEARCH:
     elif soup.find_all(href=re.compile('srscomputing')) != []:
         RES.append([s, 'SRS']) #,soup.find_all(href=re.compile('srscomputing'))])
     elif soup.find_all(href=re.compile('frazerconsultants')) != []:
-        RES.append([s, 'Frazer Consultants']) #,soup.find_all(href=re.compile('frazerconsultants'))])
+        RES.append([s, 'Frazer Consultants'])
+        #,soup.find_all(href=re.compile('frazerconsultants'))])
     elif soup.find_all(href=re.compile('consolidatedfuneralservices')) != []:
         RES.append([s, 'CFS']) #,soup.find_all(href=re.compile('consolidatedfuneralservices'))])
     elif soup.find_all(href=re.compile('funeralinnovations')) != []:
         RES.append([s, 'Funeral Innovations'])
-         #,soup.find_all(href=re.compile('funeralinnovations'))])
+        #,soup.find_all(href=re.compile('funeralinnovations'))])
     elif soup.find_all(href=re.compile('frontrunner360')) != []:
         RES.append([s, 'FrontRunner']) #,soup.find_all(href=re.compile('frontrunner360'))])
     elif soup.find_all(href=re.compile('batesvilletechnology')) != []:
