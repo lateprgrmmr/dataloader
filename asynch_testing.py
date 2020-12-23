@@ -1,3 +1,4 @@
+import csv
 import re
 import time
 
@@ -55,3 +56,4 @@ with open('atest.csv', 'r') as URLS:
         tt = time.time() - start_time
         RES.append(tt)
 print(RES)
+

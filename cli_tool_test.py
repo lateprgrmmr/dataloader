@@ -1,24 +1,41 @@
-import argparse
+import click
 
-import os
-import sys
+@click.command()
+@click.option('--count', default=1, help='Number of greetings.')
+@click.option('--name', prompt='Your name', help='The person to greet')
 
-my_parser = argparse.ArgumentParser(description='List the contents of a folder')
+def hello(count, name):
+    """Usage: cli.py [OPTIONS] LOCATION
 
-my_parser.add_argument('Path', metavar='path', type=str, help='the path to the list')
-my_parser.add_argument('-l', '--long', action='store_true', help='enable the long listing format')
+  A little weather tool that shows you the current weather in a LOCATION of
+  your choice. Provide the city name and optionally a two-digit country
+  code. Here are two examples:
 
-args = my_parser.parse_args()
+  1. London,UK
 
-input_path = args.Path
+  2. Canmore
 
-if not os.path.isdir(input_path):
-    print('The path specified does not exist')
-    sys.exit()
+  You need a valid API key from OpenWeatherMap for the tool to work. You can
+  sign up for a free account at https://openweathermap.org/appid."""
+    for x in range(count):
+        click.echo('Hello %s!' % name)
 
-for line in os.listdir(input_path):
-    if args.long:
-        size = os.stat(os.path.join(input_path, line)).st_size
-        line = '%10d %s' % (size, line)
-    print(line)
+if __name__ == '__main__':
+    hello()
 
+
+
+
+# import click
+
+# @click.command()
+# @click.option('--count', default=1, help='Number of greetings.')
+# @click.option('--name', prompt='Your name',
+#               help='The person to greet.')
+# def hello(count, name):
+#     """Simple program that greets NAME for a total of COUNT times."""
+#     for x in range(count):
+#         click.echo('Hello %s!' % name)
+
+# if __name__ == '__main__':
+#     hello()
