@@ -1,10 +1,6 @@
+import pandas as pd
 import usaddress as us
-import easypost as ep
-#import pandas as pd
-import petl as etl
-#import csv
 
-ep.api_key = "EZTKece6bf0ff0fa48bf8da13fa4196afd16f8dyDUj8fqj0AtdYj0jmuQ"
 m = {
     'Recipient': 'name',
     'AddressNumber': 'street1',
@@ -36,17 +32,23 @@ m = {
     'ZipCode': 'zip',
 }
 
-# ez = (
-#     ['delivery']: 'verify',
-#     ['street1']: 'street1',
-#     ['street2']: 'street2',
-#     ['city']: 'city',
-#     ['state']: 'state',
-#     ['zip']: 'zip',
-# )
-T1 = etl.fromcsv('address1.csv')
-#print(T2)
-T2 = etl.convert(T1, 'Street Address', lambda x: us.parse(x.title()))#, m))
-#T3 = etl.convert(T2, 'Street Address', lambda y: type(y))
-#etl.tocsv(T3, 'testing.csv')
-print(T2)
+ADDRESS = []
+data = pd.read_csv('address.csv', dtype='string')
+for row in data['description']:
+    try:
+        b = us.tag(str(row), tag_mapping=m)
+        # w = [b[0]['street1'], b[0]['street1'], b[0]['street2'],
+        #      b[0]['city'], b[0]['state'], b[0]['zip']]
+        w = [b[0]]
+        ADDRESS.append(w)
+    except us.RepeatedLabelError as e:
+        n = 'Check Address'
+        ADDRESS.append(n)
+    fixed = pd.DataFrame(ADDRESS, columns=['fh_name',
+                                           'address1',
+                                           'address2',
+                                           'city',
+                                           'state',
+                                           'postal_code'])
+o = pd.DataFrame(fixed)
+o.to_csv('parsed_addresses.csv')
