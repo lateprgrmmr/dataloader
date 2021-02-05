@@ -1,36 +1,38 @@
-# import pandas as pd
-from fuzzywuzzy import fuzz
+import pandas as pd
+from fuzzywuzzy import process
 
-STRING_1 = 'Cooley Tioga Point Cremation'
-STRING_2 = 'Cooley Tioga-Point Cremation And Burial Options, Inc.'
+# STRING_1 = 'Cooley Tioga Point Cremation'
+# STRING_2 = 'Cooley Tioga-Point Cremation And Burial Options, Inc.'
 
-Ratio = fuzz.ratio(STRING_1.lower(), STRING_2.lower())
+# Ratio = fuzz.ratio(STRING_1.lower(), STRING_2.lower())
 
-Partial_Ratio = fuzz.partial_ratio(STRING_1.lower(), STRING_2.lower())
+# Partial_Ratio = fuzz.partial_ratio(STRING_1.lower(), STRING_2.lower())
 
-Token_Sort_Ratio = fuzz.token_sort_ratio(STRING_1, STRING_2)
+# Token_Sort_Ratio = fuzz.token_sort_ratio(STRING_1, STRING_2)
 
-Token_Set_Ratio = fuzz.token_set_ratio(STRING_1,STRING_2)
+# Token_Set_Ratio = fuzz.token_set_ratio(STRING_1,STRING_2)
 
-print('Ratio: ', Ratio)
-print('Partial Ratio: ', Partial_Ratio)
-print('Token Sort Ratio: ', Token_Sort_Ratio)
-print('Token Set Ratio: ', Token_Set_Ratio)
+# print('Ratio: ', Ratio)
+# print('Partial Ratio: ', Partial_Ratio)
+# print('Token Sort Ratio: ', Token_Sort_Ratio)
+# print('Token Set Ratio: ', Token_Set_Ratio)
+# a = open('fuzz3.csv')
+# b = open('fuzz4.csv')
+df2 = pd.read_csv('caskets_vendor.csv', encoding='utf-8')
+df1 = pd.read_csv('casket_gather.csv', encoding='utf-8')
 
-# df1 = pd.DataFrame(fuzz1)
-# df2 = pd.DataFrame(fuzz2)
-# df1['key'] = df1.sum(1)
-# df2['key'] = df2.sum(1)
+def fuzzy_merge(df_1, df_2, key1, key2, threshold=100, limit=1):
+    """Fuzzy match some FH names"""
 
-# for x in df2['key']:
-#     w = process.extract(x, df2.key.tolist(), limit=1)
-# def yoursource(x):
-#     if [process.extract(x, df2.key.tolist(), limit=1)][0][0][1] > 80:
-#         return [process.extract(x, df2.key.tolist(), limit=1)][0]
-#     else:
-#         return 'no match'
+    s_list = df_2[key2].tolist()
 
-# df1['key'] = df1.key.apply(yoursource)
+    m_1 = df_1[key1].apply(lambda x: process.extract(x, s_list, limit=limit))
+    df_1['matches'] = m_1
 
-# df = df1.merge(df2, on='key', how='inner').drop('key', 1)
-# print(w)
+    m_2 = df_1['matches'].apply(lambda x: ', '.join([i[0] for i in x if i[1] >= threshold]))
+    df_1['matches'] = m_2
+
+    # print(df_1)
+    return df_1.to_csv('casket_fuzz_out.csv')
+
+fuzzy_merge(df1, df2, 'name','Description', threshold=90)
