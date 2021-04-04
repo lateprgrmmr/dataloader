@@ -1,17 +1,17 @@
-case_number,decedentName,created_time,item,item_type,description,quantity, cost , price 
-20016-0037,Elbert E. Williams,2016-03-05,142030-MSG,Other,Passages Box Set,1,$47.25 ,$125.00 
-20016-0037,Elbert E. Williams,2016-03-05,C-BAT-0033,Casket,S48 Heirloom Pewter- Silver Crepe,1,"$1,005.00 ","$1,925.00 "
-2009-0078,Cardon Burtis Dalley,2009-06-08,C-BAT-0039,Casket,"4DD Mansfield 27""",1, $ -   ,"$2,795.00 "
-2009-0078,Cardon Burtis Dalley,2009-06-08,VLT-DBV-0003,Vault,Wilbert Monticello,1,$610.00 ,"$1,195.00 "
-2009-0081,Kayron Lafayette Alford,2009-06-10,C-BAT-0011,Casket,Hartfield-Rosetan Crepe,1, $ -   ,"$2,495.00 "
-2009-0081,Kayron Lafayette Alford,2009-06-10,VLT-DBV-0003,Vault,Wilbert Monticello,1,$610.00 ,"$1,195.00 "
-2009-0090,Jerry H. Luecke,2009-07-18,C-BAT-0029,Casket,N85 Franklin Silver- Silver Crepe,1, $ -   ,"$1,895.00 "
-2009-0090,Jerry H. Luecke,2009-07-18,VLT-DBV-0003,Vault,Wilbert Monticello,1,$610.00 ,"$1,195.00 "
-2009-0095,Jim Henry Harden,2009-07-30,C-BAT-0020,Casket,JO1 Silver Finch- Light Blue Velvet,1, $ -   ,"$3,250.00 "
-2009-0096,Joshua Chad Davis,2009-07-25,1300-MSG,Other,Standard Register Book - Passages,1, $ -   ,$45.00 
-2009-0096,Joshua Chad Davis,2009-07-25,C-BAT-0029,Casket,N85 Franklin Silver- Silver Crepe,1,"$1,105.00 ","$1,895.00 "
-2009-0096,Joshua Chad Davis,2009-07-25,VLT-DBV-0001,Vault,Norwalk,1,$230.00 ,$850.00 
-2009-0097,Donna Mimbs Puckett,2009-07-26,C-BAT-0024,Casket,A40 Primrose-Moss Pink Crepe,1, $ -   ,"$2,595.00 "
-2009-0097,Donna Mimbs Puckett,2009-07-26,VLT-DBV-0003,Vault,Wilbert Monticello,1,$610.00 ,"$1,195.00 "
-2009-0099,Bernice M. Branch,2009-07-30,C-BAT-0023,Casket,J37 Amethyst- Moss Pink Crepe,1, $ -   ,"$2,395.00 "
-2009-0099,Bernice M. Branch,2009-07-30,VLT-DBV-0003,Vault,Wilbert Monticello,1,$610.00 ,"$1,195.00 "
+case_number,decedentName,created_time,item,item_type,description, quantity ,   cost   ,   price   
+20016-0037,Elbert E. Williams,2016-03-05,142030-MSG,Other,Passages Box Set,1,47.25,125.00
+20016-0037,Elbert E. Williams,2016-03-05,C-BAT-0033,Casket,S48 Heirloom Pewter- Silver Crepe,1,1005.00,1925.00
+2009-0078,Cardon Burtis Dalley,2009-06-08,C-BAT-0039,Casket,"4DD Mansfield 27""",1,0.00,2795.00
+2009-0078,Cardon Burtis Dalley,2009-06-08,VLT-DBV-0003,Vault,Wilbert Monticello,1,610.00,1195.00
+2009-0081,Kayron Lafayette Alford,2009-06-10,C-BAT-0011,Casket,Hartfield-Rosetan Crepe,1,0.00,2495.00
+2009-0081,Kayron Lafayette Alford,2009-06-10,VLT-DBV-0003,Vault,Wilbert Monticello,1,610.00,1195.00
+2009-0090,Jerry H. Luecke,2009-07-18,C-BAT-0029,Casket,N85 Franklin Silver- Silver Crepe,1,0.00,1895.87
+2009-0090,Jerry H. Luecke,2009-07-18,VLT-DBV-0003,Vault,Wilbert Monticello,1,610.00,1195.00
+2009-0095,Jim Henry Harden,2009-07-30,C-BAT-0020,Casket,JO1 Silver Finch- Light Blue Velvet,1,0.00,3250.00
+2009-0096,Joshua Chad Davis,2009-07-25,1300-MSG,Other,Standard Register Book - Passages,1,0.00,45.00
+2009-0096,Joshua Chad Davis,2009-07-25,C-BAT-0029,Casket,N85 Franklin Silver- Silver Crepe,1,1105.00,1895.00
+2009-0096,Joshua Chad Davis,2009-07-25,VLT-DBV-0001,Vault,Norwalk,1,230.00,850.00
+2009-0097,Donna Mimbs Puckett,2009-07-26,C-BAT-0024,Casket,A40 Primrose-Moss Pink Crepe,1,0.00,2595.00
+2009-0097,Donna Mimbs Puckett,2009-07-26,VLT-DBV-0003,Vault,Wilbert Monticello,1,610.00,1195.00
+2009-0099,Bernice M. Branch,2009-07-30,C-BAT-0023,Casket,J37 Amethyst- Moss Pink Crepe,1,0.00,2395.00
+2009-0099,Bernice M. Branch,2009-07-30,VLT-DBV-0003,Vault,Wilbert Monticello,1,610.00,1195.67

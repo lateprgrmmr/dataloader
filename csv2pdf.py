@@ -16,6 +16,14 @@ def main(input_file, pathname):
     unique_case_number = df['Case Number'].unique()
     for case in unique_case_number[1:]:
         case_table = df[df['Case Number'] == case]
+        add_total = case_table.append(
+            case_table[['Quantity', 'Cost', 'Price']].astype(
+                float).sum(),
+            ignore_index=True).fillna('')
+        report_table = add_total[['Created Time', 'Item Num',
+                                  'Item Category', 'Item Description',
+                                  'Quantity', 'Cost',
+                                  'Price']]
         decedent = case_table.iloc[0]['Decedent Name']
 
         report = '''
@@ -50,16 +58,17 @@ def main(input_file, pathname):
                 </body>
             </main>
         </html>
-        ''' % (case, decedent, case_table.to_html(index=False, border=0))
+        ''' % (case, decedent, report_table.to_html(index=False,
+                                                    border=0))
     # print(report)
     # print(decedent)
-        filename = pathname + case + '.html'
-        with open(filename, 'w') as fo:
-            fo.write(report)
+    filename = pathname + case + '.html'
+    with open(filename, 'w') as fo:
+        fo.write(report)
 
-        for filepath in glob.iglob(pathname + '*.html'):
-            stripped_filename = filepath[:-5]
-            pdfkit.from_file(filepath, stripped_filename + '.pdf')
+    for filepath in glob.iglob(pathname + '*.html'):
+        stripped_filename = filepath[:-5]
+        pdfkit.from_file(filepath, stripped_filename + '.pdf')
 
 
 if __name__ == "__main__":
