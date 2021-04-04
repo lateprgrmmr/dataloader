@@ -1,0 +1,34 @@
+# begin the table
+print("<table>")
+
+# column headers
+print("<th>")
+print("<td>Week</td>")
+print("<td>Opp</td>")
+print("<td>ACscr</td>")
+print("<td>OPPscr</td>")
+print("<td>Location</td>")
+print("</th>")
+
+infile = open("Crushers.csv","r")
+
+for line in infile:
+    row = line.split(",")
+    age = row[0]
+    week = row [1]
+    opp = row[2]
+    ACscr = row[3]
+    OPPscr = row[4]
+    location = row[5]
+
+    if age == 'U12':
+        print("<tr>")
+        print("<td>%s</td>" % week)
+        print("<td>%s</td>" % opp)
+        print("<td>%s</td>" % ACscr)
+        print("<td>%s</td>" % OPPscr)
+        print("<td>%s</td>" % location)
+        print("</tr>")
+
+# end the table
+print("</table>")
