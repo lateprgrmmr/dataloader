@@ -17,14 +17,14 @@ import shutil
 #              shutil.move(f, new_intel_dir) # else move to intel dir
 
 filepaths = []
-for filepath in glob.iglob(
-        '/Users/kevinbratt/Downloads/Rollins Contract - PDFs/*'):
-    filepaths.append(filepath.replace(
-        '/Users/kevinbratt/Downloads/Rollins Contract - PDFs/', ''))
-out = csv.writer(open('filelist.csv', 'w'))
+for filepath in glob.iglob('/Users/kevinbratt/Downloads/Rollins_PDF/*'):
+    filepaths.append(filepath)  # .replace(
+    #     '/Users/kevinbratt/Downloads/Rollins Contract - PDFs/', ''))
+out = csv.writer(open('pdfPaths.csv', 'w'))
 for each in filepaths:
     out.writerow([each])
 # new_dest = '/Users/kevinbratt/Downloads/RollinsContracts'
+
 
 # contract_pdfs = []
 # for i in filepaths:
