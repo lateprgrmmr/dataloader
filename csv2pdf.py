@@ -17,7 +17,6 @@ def contract_report(merchandise_file, services_file, contract_file, pathname):
         merchReportOut = filtered_merch[['ContractID', 'MerchandiseCategoryID',
                                          'Name', 'SerialNumber', 'Quantity', 'Price']].to_html(index=False, border=0)
 
-<<<<<<< HEAD
     services = pd.read_csv(input_pathname + services_file).fillna(0)
     serv_contract_id = services['ContractID'].unique()
     for serv_contract in serv_contract_id:
@@ -45,20 +44,6 @@ def contract_report(merchandise_file, services_file, contract_file, pathname):
         decedentFirst = case_table.iloc[0]['FirstName']
         decedentLast = case_table.iloc[0]['LastName']
         decedent = decedentFirst + ' ' + decedentLast
-=======
-    unique_case_number = df['Case Number'].unique()
-    for case in unique_case_number[1:]:
-        case_table = df[df['Case Number'] == case]
-        add_total = case_table.append(
-            case_table[['Quantity', 'Cost', 'Price']].astype(
-                float).sum(),
-            ignore_index=True).fillna('')
-        report_table = add_total[['Created Time', 'Item Num',
-                                  'Item Category', 'Item Description',
-                                  'Quantity', 'Cost',
-                                  'Price']]
-        decedent = case_table.iloc[0]['Decedent Name']
->>>>>>> 1da574d3f789f9d706ef90b9962276232ecd83ca
 
         report = '''
         <!DOCTYPE html>
@@ -98,20 +83,11 @@ def contract_report(merchandise_file, services_file, contract_file, pathname):
                 </body>
             </main>
         </html>
-<<<<<<< HEAD
         ''' % (case, decedent, merchReportOut, serviceReportOut, report_table)
-=======
-        ''' % (case, decedent, report_table.to_html(index=False,
-                                                    border=0))
->>>>>>> 1da574d3f789f9d706ef90b9962276232ecd83ca
     # print(report)
     # print(case)
     # print(decedent)
-<<<<<<< HEAD
     filename = pathname + 'contract_' + case + '.html'
-=======
-    filename = pathname + case + '.html'
->>>>>>> 1da574d3f789f9d706ef90b9962276232ecd83ca
     with open(filename, 'w') as fo:
         fo.write(report)
 
