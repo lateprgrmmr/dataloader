@@ -1,0 +1,252 @@
+<head>
+    <style>
+        .decedent-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
+        .decedent-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+        }
+        .decedent-box table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+        .decedent-box table tr td:nth-child(2) {
+				text-align: right;
+		}
+        .decedent-box table tr.heading {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+        .decedent-box table tr.item td {
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="decedent-box">
+        <table>
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td class="title">
+                                <img src="https://res.cloudinary.com/gather-app-prod/image/upload/c_limit,f_auto,q_auto,w_350/v1/prod/user_provided/funeral_home/518/1604078448400-f27rFm07Rx">
+                            </td>
+                            <br>
+                    </table>
+                </td>
+                <br>
+                <td>
+                    <table>
+                        <tr class="information">
+                            <td>Haughey Funeral Home, Inc.</td>
+                        </tr>
+                        <tr>
+                            <td>Jon T. Carpenter - Director</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="case-details">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td class="detail">Decedent: {{ case['Decedent Name'] }}</td>
+                        </tr>
+                        <tr>
+                            <td class="detail">Case Number: {{ case['Case Number'] }}</td>
+                        </tr>
+                        <tr>
+                            <td class="detail">Contract Date: {{ case['Finance']['Contract Date'] }}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+        <table>
+            <thead>
+                <tr class="heading">
+                    <th>Alterations</th>
+                    <th class="totalCol">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in case['Alterations'] %}
+                <tr class="item">
+                    <td>{{ i['Description'] }}</td>
+                    <td class="totalCol">{{ i['Total'] }}</td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Total Alterations:</th>
+                    {% if case['Finance']['Alterations Total'] is defined %}
+                    <td class="totalCol">{{ case['Finance']['Alterations Total'] }}</td>
+                    {% else %}
+                    <td class="totalCol">$ 0.00</td>
+                    {% endif %}
+                </tr>
+            </tfoot>
+        </table>
+        <br>
+        <table>
+            <thead>
+                <tr class="heading">
+                    <th>Automotive</th>
+                    <th class="totalCol">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in case['Automotive'] %}
+                <tr class="item">
+                    <td>{{ a['Description'] }}</td>
+                    {% if a['Total'] is defined %}
+                    <td class="totalCol">{{ '$ {:,.2f}'.format(a['Total']) }}</td>
+                    {% else %}
+                    <td class="totalCol">$ 0.00</td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Total Automotive:</th>
+                    {% if case['Finance']['Total Automotive'] is defined %}
+                    <td class="totalCol">{{ '$ {:,.2f}'.format(case['Finance']['Total Automotive']) }}</td>
+                    {% else %}
+                    <td class="totalCol">$ 0.00</td>
+                    {% endif %}
+                </tr>
+            </tfoot>
+        </table>
+        <br>
+        <table>
+            <thead>
+                <tr class="heading">
+                    <th>Cash Advances</th>
+                    <th class="totalCol">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in case['Cash'] %}
+                <tr class="item">
+                    <td>{{ c['Description'] }}</td>
+                    <td class="totalCol">{{ c['Total'] }}</td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Total Cash Advances:</th>
+                    {% if case['Finance']['Cash Advances Total'] is defined %}
+                    <td class="totalCol">{{ case['Finance']['Cash Advances Total'] }}</td>
+                    {% else %}
+                    <td class="totalCol">$ 0.00</td>
+                    {% endif %}
+                </tr>
+            </tfoot>
+        </table>
+        <br>
+        <table>
+            <thead>
+                <tr class="heading">
+                    <th>Facilities</th>
+                    <th class="totalCol">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for f in case['Facilities'] %}
+                <tr class="item">
+                    <td>{{ f['Description'] }}</td>
+                    {% if f['Total'] is defined %}
+                    <td class="totalCol">{{ '$ {:,.2f}'.format(f['Total']) }}</td>
+                    {% else %}
+                    <td class="totalCol">$ 0.00</td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Total Facility Charges:</th>
+                    {% if case['Finance']['Total Facility'] is defined %}
+                    <td class="totalCol">{{ '$ {:,.2f}'.format(case['Finance']['Total Facility']) }}</td>
+                    {% else %}
+                    <td class="totalCol">$ 0.00</td>
+                    {% endif %}
+                </tr>
+            </tfoot>
+        </table>
+        <br>
+        <table>
+            <thead>
+                <tr class="heading">
+                    <th>Merchandise</th>
+                    <th class="totalCol">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in case['Merchandise'] %}
+                <tr class="item">
+                    <td>{{ m['Description'] }}</td>
+                    {% if m['Total'] is defined %}
+                    <td class="totalCol">{{ '$ {:,.2f}'.format(m['Total']) }}</td>
+                    {% else %}
+                    <td class="totalCol">$ 0.00</td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Total Merchandise Sales:</th>
+                    {% if case['Finance']['Total Merchandise'] is defined %}
+                    <td class="totalCol">{{ '$ {:,.2f}'.format(case['Finance']['Total Merchandise']) }}</td>
+                    {% else %}
+                    <td class="totalCol">$ 0.00</td>
+                    {% endif %}
+                </tr>
+            </tfoot>
+        </table>
+        <br><br>
+        <table>
+            <thead>
+                <tr class="heading">
+                    <th>Sub Total</th>
+                    <td class="totalCol">{{ case['Finance']['Sub Total'] }}</td>
+                </tr>
+            </thead>
+        </table>
+        <table>
+            <thead>
+                <tr class="heading">
+                    <th>Grand Total</th>
+                    {% if case['Finance']['Global Total'] is defined %}
+                    <td class="totalCol" >{{ case['Finance']['Global Total'] }}</td>
+                    {% else %}
+                    <td class="totalCol" >$ 0.00</td>
+                    {% endif %}
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
