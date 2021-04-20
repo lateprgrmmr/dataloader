@@ -1,4 +1,6 @@
 <head>
+    <meta charset="utf-8" />
+    <title>{{ case['Decedent Name'] }}</title>
     <style>
         .decedent-box {
             max-width: 800px;
@@ -6,7 +8,7 @@
             padding: 30px;
             border: 1px solid #eee;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-            font-size: 16px;
+            font-size: 14px;
             line-height: 24px;
             font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
             color: #555;
@@ -23,10 +25,15 @@
         .decedent-box table tr td:nth-child(2) {
 				text-align: right;
 		}
+        .decedent-box table tr th:nth-child(2) {
+				text-align: right;
+		}
+        .decedent-box tr.top table td {
+				padding-bottom: 20px;
+		}
         .decedent-box table tr.heading {
             background: #eee;
             border-bottom: 1px solid #ddd;
-            font-weight: bold;
         }
         .decedent-box table tr.item td {
             border-bottom: 1px solid #eee;
@@ -35,7 +42,7 @@
 </head>
 <body>
     <div class="decedent-box">
-        <table>
+        <table cellpadding="0" cellspacing="0">
             <tr class="top">
                 <td colspan="2">
                     <table>
@@ -74,14 +81,14 @@
                 </td>
             </tr>
         </table>
-        <table>
+        <table cellpadding="0" cellspacing="0">
             <thead>
                 <tr>
                     <th></th>
                 </tr>
             </thead>
         </table>
-        <table>
+        <table cellpadding="0" cellspacing="0">
             <thead>
                 <tr class="heading">
                     <th>Alterations</th>
@@ -108,7 +115,7 @@
             </tfoot>
         </table>
         <br>
-        <table>
+        <table cellpadding="0" cellspacing="0">
             <thead>
                 <tr class="heading">
                     <th>Automotive</th>
@@ -139,7 +146,7 @@
             </tfoot>
         </table>
         <br>
-        <table>
+        <table cellpadding="0" cellspacing="0">
             <thead>
                 <tr class="heading">
                     <th>Cash Advances</th>
@@ -166,7 +173,7 @@
             </tfoot>
         </table>
         <br>
-        <table>
+        <table cellpadding="0" cellspacing="0">
             <thead>
                 <tr class="heading">
                     <th>Facilities</th>
@@ -197,7 +204,7 @@
             </tfoot>
         </table>
         <br>
-        <table>
+        <table cellpadding="0" cellspacing="0">
             <thead>
                 <tr class="heading">
                     <th>Merchandise</th>
@@ -228,7 +235,7 @@
             </tfoot>
         </table>
         <br><br>
-        <table>
+        <table cellpadding="0" cellspacing="0">
             <thead>
                 <tr class="heading">
                     <th>Sub Total</th>
@@ -236,7 +243,7 @@
                 </tr>
             </thead>
         </table>
-        <table>
+        <table cellpadding="0" cellspacing="0">
             <thead>
                 <tr class="heading">
                     <th>Grand Total</th>
