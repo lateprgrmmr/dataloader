@@ -1,0 +1,120 @@
+{
+    "Decedent Name": "June A. Betts",
+    "Case Number": "21-24",
+    "Finance": {
+        "Contract Date": "03/08/2021",
+        "Sub Total": "$ 11,405.00",
+        "Global Total": "$ 11,094.30",
+        "Total Alterations": 364.29999999999995,
+        "Total Automotive": 990.0,
+        "Total Cash Advances": 825.0,
+        "Total Facility": 4865.0,
+        "Total Merchandise": 5550.0
+    },
+    "Alterations": [
+        {
+            "Description": "Additional Flower Charge",
+            "Total": 50.0
+        },
+        {
+            "Description": "Fairview Cemetery Winter Fee",
+            "Total": 200.0
+        },
+        {
+            "Description": "Add Leader Actual",
+            "Total": 264.3
+        },
+        {
+            "Description": "Remove Leader Estimate",
+            "Total": -225.0
+        },
+        {
+            "Description": "Add Sound Tech - Dan Loucks",
+            "Total": 75.0
+        }
+    ],
+    "Automotive": [
+        {
+            "Description": "Hearse:",
+            "Total": 395.0
+        },
+        {
+            "Description": "Transfer Remains:",
+            "Total": 470.0
+        },
+        {
+            "Description": "Lead Car/Clergy:",
+            "Total": 125.0
+        }
+    ],
+    "Cash": [
+        {
+            "Description": "Fairview Cemetery",
+            "Total": 400.0
+        },
+        {
+            "Description": "Leader Estimate",
+            "Total": 225.0
+        },
+        {
+            "Description": "Clergy",
+            "Total": 150.0
+        },
+        {
+            "Description": "Death Certificates (5)",
+            "Total": 50.0
+        }
+    ],
+    "Facilities": [
+        {
+            "Description": "Vault Co. / Cemetery Equipment:",
+            "Total": 345.0
+        },
+        {
+            "Description": "Dressing / Casketing:",
+            "Total": 295.0
+        },
+        {
+            "Description": "Basic Arrangements:",
+            "Total": 2515.0
+        },
+        {
+            "Description": "Supervision for Visitation:",
+            "Total": 400.0
+        },
+        {
+            "Description": "Embalming:",
+            "Total": 790.0
+        },
+        {
+            "Description": "Cosmetology:",
+            "Total": 125.0
+        },
+        {
+            "Description": "Funeral Service:",
+            "Total": 395.0
+        }
+    ],
+    "Merchandise": [
+        {
+            "Description": "Casket: Matthews Aurora Funeral Solutions Poplar Veneer   Ashford Crepe",
+            "Total": 2575.0
+        },
+        {
+            "Description": "Other Merchandise:  Flowers Allowance",
+            "Total": 350.0
+        },
+        {
+            "Description": "Register Book:",
+            "Total": 325.0
+        },
+        {
+            "Description": "Monument Lettering",
+            "Total": 225.0
+        },
+        {
+            "Description": "Outer Recep.: Zeiser Wilbert Vault, Inc. Conctete/Strentex   Monticello",
+            "Total": 2075.0
+        }
+    ]
+}

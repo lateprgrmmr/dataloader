@@ -63,12 +63,12 @@ class MIMSHandler(xml.sax.ContentHandler):
                     d = datetime.datetime.strptime(
                         attrs['DateContract'], '%Y-%m-%dT%H:%M:%S')
                 intFin['Contract Date'] = d.strftime('%m/%d/%Y')
-            if 'TotalCashAdvances' in attrs:
-                intFin['Cash Advances Total'] = "$ {:,.2f}".format(
-                    float(attrs['TotalCashAdvances']))
-            if 'TotalAlterations' in attrs:
-                intFin['Alterations Total'] = "$ {:,.2f}".format(
-                    float(attrs['TotalAlterations']))
+            # if 'TotalCashAdvances' in attrs:
+            #     intFin['Cash Advances Total'] = "$ {:,.2f}".format(
+            #         float(attrs['TotalCashAdvances']))
+            # if 'TotalAlterations' in attrs:
+            #     intFin['Alterations Total'] = "$ {:,.2f}".format(
+            #         float(attrs['TotalAlterations']))
             if 'Total' in attrs:
                 intFin['Sub Total'] = "$ {:,.2f}".format(float(attrs['Total']))
             if 'TotalGlobal' in attrs:
@@ -84,7 +84,7 @@ class MIMSHandler(xml.sax.ContentHandler):
             if 'Description' in attrs:
                 intAlt['Description'] = attrs['Description']
             if 'Price' in attrs:
-                intAlt['Total'] = "$ {:,.2f}".format(float(attrs['Price']))
+                intAlt['Total'] = round(float(attrs['Price']), 2)
             # if 'Deleted' in attrs:
             #     intAlt['Deleted'] = attrs['Deleted']
             self.altList.append(intAlt)
@@ -96,7 +96,9 @@ class MIMSHandler(xml.sax.ContentHandler):
             intAuto = {}
             if 'Label' in attrs:
                 intAuto['Description'] = attrs['Label']
-            if 'Price' in attrs:
+            if attrs['Label'] == 'Transfer Remains:':
+                intAuto['Total'] = 470.00
+            elif 'Price' in attrs:
                 intAuto['Total'] = round(float(attrs['Price']), 2)
             # if 'Deleted' in attrs:
             #     intAuto['Deleted'] = attrs['Deleted']
@@ -110,7 +112,7 @@ class MIMSHandler(xml.sax.ContentHandler):
             if 'Description' in attrs:
                 intCash['Description'] = attrs['Description']
             if 'Total' in attrs:
-                intCash['Total'] = "$ {:,.2f}".format(float(attrs['Total']))
+                intCash['Total'] = round(float(attrs['Total']), 2)
             # if 'Deleted' in attrs:
             #     intCash['Deleted'] = attrs['Deleted']
             self.cashList.append(intCash)
@@ -160,6 +162,17 @@ class MIMSHandler(xml.sax.ContentHandler):
             eprint("All done!")
         elif name == 'Case':
             try:
+                altTotal = self.currentCase['Alterations']
+                altTtl = []
+                for alt in altTotal:
+                    try:
+                        altTtl.append(alt['Total'])
+                    except KeyError:
+                        altTtl.append(0.00)
+                self.currentCase['Finance']['Total Alterations'] = sum(altTtl)
+            except KeyError:
+                pass
+            try:
                 autoTotal = self.currentCase['Automotive']
                 autoTtl = []
                 for auto in autoTotal:
@@ -168,6 +181,17 @@ class MIMSHandler(xml.sax.ContentHandler):
                     except KeyError:
                         autoTtl.append(0.00)
                 self.currentCase['Finance']['Total Automotive'] = sum(autoTtl)
+            except KeyError:
+                pass
+            try:
+                cashTotal = self.currentCase['Cash']
+                cashTtl = []
+                for cash in cashTotal:
+                    try:
+                        cashTtl.append(cash['Total'])
+                    except KeyError:
+                        cashTtl.append(0.00)
+                self.currentCase['Finance']['Total Cash Advances'] = sum(cashTtl)
             except KeyError:
                 pass
             try:
@@ -192,21 +216,22 @@ class MIMSHandler(xml.sax.ContentHandler):
                 self.currentCase['Finance']['Total Merchandise'] = sum(merchTtl)
             except KeyError:
                 pass
-            jOut = json.dumps(self.currentCase)
-            jUse = json.loads(jOut)
-            with open('case_data.json', 'w') as f:
-                f.write(json.dumps(self.currentCase))
+            if self.currentCase['Case Number'] == '21-24':
+                jOut = json.dumps(self.currentCase)
+                jUse = json.loads(jOut)
+                with open('case_data.json', 'w') as f:
+                    f.write(json.dumps(self.currentCase))
 
-            templateLoader = jinja2.FileSystemLoader(searchpath='./')
-            templateEnv = jinja2.Environment(loader=templateLoader)
-            TEMPLATE_FILE = 'pdf_temp.html'
-            template = templateEnv.get_template(TEMPLATE_FILE)
+                templateLoader = jinja2.FileSystemLoader(searchpath='./')
+                templateEnv = jinja2.Environment(loader=templateLoader)
+                TEMPLATE_FILE = 'pdf_temp.html'
+                template = templateEnv.get_template(TEMPLATE_FILE)
 
-            for e in jUse:
-                output = template.render(case=jUse)
-                html_file = open('testing_jinga.html', 'w')
-                html_file.write(output)
-                html_file.close()
+                for e in jUse:
+                    output = template.render(case=jUse)
+                    html_file = open('mims_finance.html', 'w')
+                    html_file.write(output)
+                    html_file.close()
             self.currentCase = {}
             self.finList = []
             self.fin = {}

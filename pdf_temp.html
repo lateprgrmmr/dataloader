@@ -4,18 +4,19 @@
     <style>
         .decedent-box {
             max-width: 800px;
+            max-height: 1050px;
             margin: auto;
             padding: 30px;
             border: 1px solid #eee;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-            font-size: 14px;
-            line-height: 24px;
+            /* font-size: 14px; */
+            /* line-height: 24px; */
             font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
             color: #555;
         }
         .decedent-box table {
             width: 100%;
-            line-height: inherit;
+            /* line-height: inherit; */
             text-align: left;
         }
         .decedent-box table td {
@@ -23,13 +24,13 @@
             vertical-align: top;
         }
         .decedent-box table tr td:nth-child(2) {
-				text-align: right;
+            text-align: right;
 		}
         .decedent-box table tr th:nth-child(2) {
-				text-align: right;
+            text-align: right;
 		}
         .decedent-box tr.top table td {
-				padding-bottom: 20px;
+            padding-bottom: 20px;
 		}
         .decedent-box table tr.heading {
             background: #eee;
@@ -99,15 +100,19 @@
                 {% for i in case['Alterations'] %}
                 <tr class="item">
                     <td>{{ i['Description'] }}</td>
-                    <td class="totalCol">{{ i['Total'] }}</td>
+                    {% if i['Total'] is defined %}
+                    <td class="totalCol">{{ '$ {:,.2f}'.format(i['Total']) }}</td>
+                    {% else %}
+                    <td class="totalCol">$ 0.00</td>
+                    {% endif %}
                     {% endfor %}
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <th>Total Alterations:</th>
-                    {% if case['Finance']['Alterations Total'] is defined %}
-                    <td class="totalCol">{{ case['Finance']['Alterations Total'] }}</td>
+                    {% if case['Finance']['Total Alterations'] is defined %}
+                    <td class="totalCol">{{ '$ {:,.2f}'.format(case['Finance']['Total Alterations']) }}</td>
                     {% else %}
                     <td class="totalCol">$ 0.00</td>
                     {% endif %}
@@ -157,15 +162,19 @@
                 {% for c in case['Cash'] %}
                 <tr class="item">
                     <td>{{ c['Description'] }}</td>
-                    <td class="totalCol">{{ c['Total'] }}</td>
+                    {% if c['Total'] is defined %}
+                    <td class="totalCol">{{ '$ {:,.2f}'.format(c['Total']) }}</td>
+                    {% else %}
+                    <td class="totalCol">$ 0.00</td>
+                    {% endif %}
                     {% endfor %}
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <th>Total Cash Advances:</th>
-                    {% if case['Finance']['Cash Advances Total'] is defined %}
-                    <td class="totalCol">{{ case['Finance']['Cash Advances Total'] }}</td>
+                    {% if case['Finance']['Total Cash Advances'] is defined %}
+                    <td class="totalCol">{{ '$ {:,.2f}'.format(case['Finance']['Total Cash Advances']) }}</td>
                     {% else %}
                     <td class="totalCol">$ 0.00</td>
                     {% endif %}
