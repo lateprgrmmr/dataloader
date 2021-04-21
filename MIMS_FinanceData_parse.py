@@ -63,14 +63,16 @@ class MIMSHandler(xml.sax.ContentHandler):
                     d = datetime.datetime.strptime(
                         attrs['DateContract'], '%Y-%m-%dT%H:%M:%S')
                 intFin['Contract Date'] = d.strftime('%m/%d/%Y')
-            # if 'TotalCashAdvances' in attrs:
-            #     intFin['Cash Advances Total'] = "$ {:,.2f}".format(
-            #         float(attrs['TotalCashAdvances']))
-            # if 'TotalAlterations' in attrs:
-            #     intFin['Alterations Total'] = "$ {:,.2f}".format(
-            #         float(attrs['TotalAlterations']))
+            if 'CreditDescription' in attrs or 'Credit2Description' in attrs:
+                intFin['Credit Descriptions'] = (attrs['CreditDescription'] + ' ' +
+                                                 attrs['Credit2Description']).strip()
+            if 'Credit' in attrs:
+                intCredit = 0
+                intCredit += (float(attrs['Credit']) +
+                              float(attrs['Credit2']) + float(attrs['Credit3']))
+                intFin['Total Credits'] = intCredit
             if 'Total' in attrs:
-                intFin['Sub Total'] = "$ {:,.2f}".format(float(attrs['Total']))
+                intFin['Sub Total'] = round(float(attrs['Total']), 2)
             if 'TotalGlobal' in attrs:
                 intFin['Global Total'] = "$ {:,.2f}".format(
                     float(attrs['TotalGlobal']))
@@ -191,7 +193,8 @@ class MIMSHandler(xml.sax.ContentHandler):
                         cashTtl.append(cash['Total'])
                     except KeyError:
                         cashTtl.append(0.00)
-                self.currentCase['Finance']['Total Cash Advances'] = sum(cashTtl)
+                self.currentCase['Finance']['Total Cash Advances'] = sum(
+                    cashTtl)
             except KeyError:
                 pass
             try:
@@ -213,25 +216,26 @@ class MIMSHandler(xml.sax.ContentHandler):
                         merchTtl.append(merch['Total'])
                     except KeyError:
                         merchTtl.append(0.00)
-                self.currentCase['Finance']['Total Merchandise'] = sum(merchTtl)
+                self.currentCase['Finance']['Total Merchandise'] = sum(
+                    merchTtl)
             except KeyError:
                 pass
-            if self.currentCase['Case Number'] == '21-24':
-                jOut = json.dumps(self.currentCase)
-                jUse = json.loads(jOut)
-                with open('case_data.json', 'w') as f:
-                    f.write(json.dumps(self.currentCase))
+            # if self.currentCase['Case Number'] == '21-24':
+            jOut = json.dumps(self.currentCase)
+            jUse = json.loads(jOut)
+            with open('case_data.json', 'w') as f:
+                f.write(json.dumps(self.currentCase))
 
-                templateLoader = jinja2.FileSystemLoader(searchpath='./')
-                templateEnv = jinja2.Environment(loader=templateLoader)
-                TEMPLATE_FILE = 'pdf_temp.html'
-                template = templateEnv.get_template(TEMPLATE_FILE)
+            templateLoader = jinja2.FileSystemLoader(searchpath='./')
+            templateEnv = jinja2.Environment(loader=templateLoader)
+            TEMPLATE_FILE = 'pdf_temp.html'
+            template = templateEnv.get_template(TEMPLATE_FILE)
 
-                for e in jUse:
-                    output = template.render(case=jUse)
-                    html_file = open('mims_finance.html', 'w')
-                    html_file.write(output)
-                    html_file.close()
+            for e in jUse:
+                output = template.render(case=jUse)
+                html_file = open('mims_finance.html', 'w')
+                html_file.write(output)
+                html_file.close()
             self.currentCase = {}
             self.finList = []
             self.fin = {}
